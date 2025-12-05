@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate, Link } from 'react-router'
 import { login } from '../../services/authService'
 import useForm from '../../hooks/useForm'
 import useFetch from '../../hooks/useFetch'
@@ -9,6 +9,7 @@ const LoginScreen = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const {onLogin} = useContext(AuthContext)
+  
   useEffect(
     () => {
       const query = new URLSearchParams(location.search)
@@ -17,9 +18,8 @@ const LoginScreen = () => {
         alert('Has validado tu mail exitosamente')
       }
     },
-    [] //Solo queremos que se ejecute cuando se monte el componente
+    [] 
   )
-  
 
   const LOGIN_FORM_FIELDS = {
         EMAIL: 'email',
@@ -55,25 +55,37 @@ const LoginScreen = () => {
     useEffect(
         () => {
           if(response && response.ok){
-            //Queremos que persista en memoria el auth token
-            //Dejamos que el context se encargue de que sucedera
             onLogin(response.body.auth_token)
-            
           }
         },
         [response]
     )
+
   return (
       <div className="Form-container">
         <form onSubmit={handleSubmit}>
           <div className="form-field">
             <label htmlFor="email">Email: </label>
-            <input  type="text" placeholder="jose@algo.com" value={form_state[LOGIN_FORM_FIELDS.EMAIL]} name={LOGIN_FORM_FIELDS.EMAIL} onChange={onInputChange} id={'email'} />
+            <input  
+                type="text" 
+                placeholder="jose@algo.com" 
+                value={form_state[LOGIN_FORM_FIELDS.EMAIL]} 
+                name={LOGIN_FORM_FIELDS.EMAIL} 
+                onChange={onInputChange} 
+                id={'email'} 
+            />
           </div>
 
           <div>
             <label htmlFor="password">Password: </label>
-            <input type="text" placeholder="Josesito206" value={form_state[LOGIN_FORM_FIELDS.PASSWORD]} name={LOGIN_FORM_FIELDS.PASSWORD} onChange={onInputChange} id={'password'} />
+            <input 
+                type="password"  // <--- ¡CAMBIO IMPORTANTE AQUÍ!
+                placeholder="*******" 
+                value={form_state[LOGIN_FORM_FIELDS.PASSWORD]} 
+                name={LOGIN_FORM_FIELDS.PASSWORD} 
+                onChange={onInputChange} 
+                id={'password'} 
+            />
           </div>
 
           {error && <span style={{ color: 'red' }}> {error} </span>}
@@ -81,12 +93,20 @@ const LoginScreen = () => {
 
           {
             loading
-              ? <button disabled>Loggin In</button>
-              : <button>Login</button>
+              ? <button disabled>Iniciando sesión...</button>
+              : <button type="submit">Iniciar Sesión</button>
           }
+
+          <div style={{ marginTop: '20px', fontSize: '14px' }}>
+              <span>¿No tienes cuenta? </span>
+              <Link to="/register" style={{ color: '#007bff', textDecoration: 'none' }}>
+                  ¡Crea una!
+              </Link>
+          </div>
+        
         </form>
       </div>
-      )
+  )
 }
 
-      export default LoginScreen
+export default LoginScreen

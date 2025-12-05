@@ -1,48 +1,20 @@
-import React, { useEffect } from 'react'
-import useFetch from '../../hooks/useFetch'
-import { getWorkspaces } from '../../services/workspaceService'
+import React from 'react'
 import { Link } from 'react-router'
+import TaskList from '../../Components/TaskList/TaskList'
 
-
-const HomeScreen = () => {
-
-  const { sendRequest, response, loading, error } = useFetch()
-
-  useEffect(
-    ()=> {
-      sendRequest(
-        () => getWorkspaces()
-      )
-    },
-    []
-  )
-
-  console.log(response, loading, error)
+const WorkspaceScreen = () => {
   return (
-    <div>
-      <h1>Lista de espacios de trabajo</h1>
-      {
-        loading
-        ? <span>Cargando...</span>
-        : <div>
-          {
-          response 
-          && 
-          response.data.workspaces.map(
-            (workspace) => {
-              return (
-                <div>
-                  <h2>{workspace.workspace_name}</h2>
-                  <Link to={'/workspace/' + workspace.workspace_id}>Abrir workspace</Link>
-                </div>
-              )
-            }
-          )
-          }
-        </div>
-      }
+    <div style={{ display: 'flex', height: '100vh' }}>
+        <aside style={{ width: '200px', background: '#f0f0f0', padding: '20px' }}>
+            <h3>Menú</h3>
+            <Link to="/home">⬅ Volver al Inicio</Link>
+        </aside>
+
+        <main style={{ flex: 1, padding: '20px' }}>
+            <TaskList />
+        </main>
     </div>
   )
 }
 
-export default HomeScreen
+export default WorkspaceScreen
