@@ -1,5 +1,5 @@
-import { createContext,  useEffect, useState } from "react";
-import { decodeToken } from "react-jwt";
+import { createContext, useEffect, useState } from "react";
+import { decodeToken, isExpired } from "react-jwt"; 
 import { useNavigate } from "react-router";
 
 export const AUTH_TOKEN_KEY = 'auth_token'
@@ -7,43 +7,47 @@ export const AUTH_TOKEN_KEY = 'auth_token'
 export const AuthContext = createContext()
 
 const AuthContextProvider = ({children}) => {
-
-    //Configuramos para hacer mas adelante redirecciones
     const navigate = useNavigate()
-
-    //ESTADO CON: Datos de sesion
     const [user, setUser] = useState(null)
+    const [isLogged, setIsLogged] = useState(false)
 
-    //ESTADO: Marca si esta o no logueado el usuario
-    const [ isLogged, setIsLogged ] = useState( Boolean(localStorage.getItem(AUTH_TOKEN_KEY)) )
-
-
-    //Una vez se monte el componente decodificar el token y guardar los datos de sesion
-    useEffect(
-        () => {
-            if(!localStorage.getItem(AUTH_TOKEN_KEY)){
-                setIsLogged(false)
-                setUser(null)
-                return 
-            }
-            const user = decodeToken(localStorage.getItem(AUTH_TOKEN_KEY))
-            if(user){
-                setUser(user)
+    useEffect(() => {
+        const token = localStorage.getItem(AUTH_TOKEN_KEY)
+        
+        if (token) {
+            if (isExpired(token)) {
+                onLogout() 
+            } else {
+                const userDecoded = decodeToken(token)
+                setUser(userDecoded)
                 setIsLogged(true)
             }
-            else{
-                setIsLogged(false)
-                setUser(null)
+        } else {
+            setIsLogged(false)
+            setUser(null)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!isLogged) return;
+
+        const intervalId = setInterval(() => {
+            const token = localStorage.getItem(AUTH_TOKEN_KEY)
+
+            if (token && isExpired(token)) {
+                alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.")
+                onLogout() 
             }
-        },
-        []
-    )
+        }, 5000)
+
+        return () => clearInterval(intervalId)
+    }, [isLogged])
+
 
     function onLogout(){
         localStorage.removeItem(AUTH_TOKEN_KEY)
         setIsLogged(false)
         setUser(null)
-        //Si quieren pueden redireccionar a login
         navigate('/login')
     }
 
@@ -55,18 +59,11 @@ const AuthContextProvider = ({children}) => {
         navigate('/home')
     }
 
-
-
-    return <AuthContext.Provider
-        value={{
-            isLogged,
-            user,
-            onLogin, 
-            onLogout
-        }}
-    >
-        {children}
-    </AuthContext.Provider>
+    return (
+        <AuthContext.Provider value={{ isLogged, user, onLogin, onLogout }}>
+            {children}
+        </AuthContext.Provider>
+    )
 }
 
 export default AuthContextProvider

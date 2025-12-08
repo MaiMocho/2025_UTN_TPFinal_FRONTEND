@@ -24,21 +24,20 @@ const TaskList = () => {
         }
     }, [workspace_id])
 
-    // Manejar el input de texto de cada día por separado
     const handleInputChange = (day, value) => {
         setNewTasks(prev => ({ ...prev, [day]: value }));
     }
 
-    // Crear tarea específica para un día
     const handleCreateTask = async (e, day) => {
         e.preventDefault()
         const title = newTasks[day];
         if(!title) return;
 
+        setNewTasks(prev => ({ ...prev, [day]: '' })); 
+
         await sendCreateTask(async () => {
-            await createTask(workspace_id, title, day) // <--- Enviamos el día correcto al backend
-            setNewTasks(prev => ({ ...prev, [day]: '' })); // Limpiamos el input de ese día
-            fetchTasks(() => getTasks(workspace_id)) // Recargamos lista
+            await createTask(workspace_id, title, day)
+            fetchTasks(() => getTasks(workspace_id))
         })
     }
 
@@ -58,13 +57,17 @@ const TaskList = () => {
         <div style={{ padding: '20px' }}>
             <h2 style={{color: 'white'}}>Weekly Planner</h2>
 
-            {tasksLoading && <p style={{color: 'white'}}>Cargando planner...</p>}
+            {/* ERROR: Si lo mostramos, pero el LOADING lo quitamos de aquí para que no empuje */}
             {tasksError && <p style={{color: 'red'}}>{tasksError}</p>}
             
+            {/* GRiD LAYOUT */}
             <div style={{ 
                 display: 'grid', 
                 gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-                gap: '20px' 
+                gap: '20px',
+                opacity: tasksLoading ? 0.5 : 1,
+                pointerEvents: tasksLoading ? 'none' : 'auto', 
+                transition: 'opacity 0.2s ease-in-out'
             }}>
                 {daysOfWeek.map(day => (
                     <div key={day} style={{ 
@@ -90,9 +93,11 @@ const TaskList = () => {
                                         justifyContent: 'space-between', 
                                         alignItems: 'center',
                                         marginBottom: '8px',
-                                        padding: '5px',
-                                        background: '#333',
-                                        borderRadius: '5px'
+                                        padding: '8px',
+                                        background: '#2d2d2d',
+                                        borderRadius: '5px',
+                                        borderLeft: '4px solid #00d4ff', 
+                                        color: 'white'
                                     }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                             <input 
@@ -112,7 +117,7 @@ const TaskList = () => {
                                             onClick={() => handleDelete(task._id)}
                                             style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px' }}
                                         >
-                                            X
+                                            ❌
                                         </button>
                                     </div>
                                 ))
@@ -127,14 +132,21 @@ const TaskList = () => {
                                 placeholder="Nueva tarea..."
                                 style={{ 
                                     flex: 1, 
-                                    padding: '5px', 
+                                    padding: '8px', 
                                     borderRadius: '5px', 
                                     border: '1px solid #555',
                                     background: '#222',
                                     color: 'white'
                                 }}
                             />
-                            <button type="submit" style={{ cursor: 'pointer' }}>+</button>
+                            <button type="submit" style={{ 
+                                cursor: 'pointer', 
+                                background: '#00d4ff', 
+                                border: 'none', 
+                                borderRadius: '5px',
+                                padding: '0 10px',
+                                fontWeight: 'bold'
+                            }}>+</button>
                         </form>
                     </div>
                 ))}
