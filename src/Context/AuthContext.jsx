@@ -15,8 +15,9 @@ const AuthContextProvider = ({children}) => {
         const token = localStorage.getItem(AUTH_TOKEN_KEY)
         
         if (token) {
+
             if (isExpired(token)) {
-                onLogout() 
+                onLogout()
             } else {
                 const userDecoded = decodeToken(token)
                 setUser(userDecoded)
@@ -33,13 +34,15 @@ const AuthContextProvider = ({children}) => {
 
         const intervalId = setInterval(() => {
             const token = localStorage.getItem(AUTH_TOKEN_KEY)
-
+            
+            // Si hay token y expiró...
             if (token && isExpired(token)) {
-                alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.")
-                onLogout() 
+                alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.") // Opcional: Avisar al usuario
+                onLogout() // Sacarlo automáticamente
             }
-        }, 5000)
+        }, 5000) // 5000ms = 5 segundos
 
+        // Limpieza: Cuando el componente se desmonte o el usuario haga logout, matamos el intervalo
         return () => clearInterval(intervalId)
     }, [isLogged])
 
