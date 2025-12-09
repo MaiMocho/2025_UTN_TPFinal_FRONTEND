@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { decodeToken, isExpired } from "react-jwt"; 
+import { decodeToken, isExpired } from "react-jwt";
 import { useNavigate } from "react-router";
+import Swal from 'sweetalert2'
 
 export const AUTH_TOKEN_KEY = 'auth_token'
 
@@ -13,9 +14,7 @@ const AuthContextProvider = ({children}) => {
 
     useEffect(() => {
         const token = localStorage.getItem(AUTH_TOKEN_KEY)
-        
         if (token) {
-
             if (isExpired(token)) {
                 onLogout()
             } else {
@@ -35,14 +34,22 @@ const AuthContextProvider = ({children}) => {
         const intervalId = setInterval(() => {
             const token = localStorage.getItem(AUTH_TOKEN_KEY)
             
-            // Si hay token y expiró...
             if (token && isExpired(token)) {
-                alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.") // Opcional: Avisar al usuario
-                onLogout() // Sacarlo automáticamente
+                onLogout()
+                
+                Swal.fire({
+                    title: '🐻 Helpy Freddy dice:', 
+                    text: 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
+                    icon: 'warning',
+                    confirmButtonText: 'Entendido',
+                    background: '#1a1a1a', 
+                    color: '#ffffff',
+                    confirmButtonColor: '#00d4ff', 
+                    iconColor: '#00d4ff'
+                })
             }
-        }, 5000) // 5000ms = 5 segundos
+        }, 5000) 
 
-        // Limpieza: Cuando el componente se desmonte o el usuario haga logout, matamos el intervalo
         return () => clearInterval(intervalId)
     }, [isLogged])
 
