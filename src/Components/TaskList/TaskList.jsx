@@ -60,7 +60,6 @@ const TaskList = () => {
 
             {tasksError && <p className="error-message">{tasksError}</p>}
             
-            {/* Usamos una clase condicional para la opacidad */}
             <div className={`weekly-grid ${tasksLoading ? 'loading' : ''}`}>
                 
                 {daysOfWeek.map(day => (

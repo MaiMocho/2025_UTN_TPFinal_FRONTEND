@@ -4,6 +4,7 @@ import { login } from '../../services/authService'
 import useForm from '../../hooks/useForm'
 import useFetch from '../../hooks/useFetch'
 import { AuthContext } from '../../Context/AuthContext'
+import './LoginScreen.css'
 
 const LoginScreen = () => {
   const navigate = useNavigate()
@@ -62,49 +63,52 @@ const LoginScreen = () => {
     )
 
   return (
-      <div className="Form-container">
-        <form onSubmit={handleSubmit}>
-          <div className="form-field">
-            <label htmlFor="email">Email: </label>
-            <input  
-                type="text" 
-                placeholder="jose@algo.com" 
-                value={form_state[LOGIN_FORM_FIELDS.EMAIL]} 
-                name={LOGIN_FORM_FIELDS.EMAIL} 
-                onChange={onInputChange} 
-                id={'email'} 
-            />
-          </div>
+      <div className="auth-container">
+        <div className="auth-card">
+            <h1 className="auth-title">Hello Again!</h1>
+            
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="email">Email</label>
+                    <input  
+                        className="auth-input"
+                        type="text" 
+                        placeholder="tu@email.com" 
+                        value={form_state[LOGIN_FORM_FIELDS.EMAIL]} 
+                        name={LOGIN_FORM_FIELDS.EMAIL} 
+                        onChange={onInputChange} 
+                        id={'email'} 
+                    />
+                </div>
 
-          <div>
-            <label htmlFor="password">Password: </label>
-            <input 
-                type="password"  // <--- ¡CAMBIO IMPORTANTE AQUÍ!
-                placeholder="*******" 
-                value={form_state[LOGIN_FORM_FIELDS.PASSWORD]} 
-                name={LOGIN_FORM_FIELDS.PASSWORD} 
-                onChange={onInputChange} 
-                id={'password'} 
-            />
-          </div>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="password">Password</label>
+                    <input 
+                        className="auth-input"
+                        type="password" 
+                        placeholder="••••••••" 
+                        value={form_state[LOGIN_FORM_FIELDS.PASSWORD]} 
+                        name={LOGIN_FORM_FIELDS.PASSWORD} 
+                        onChange={onInputChange} 
+                        id={'password'} 
+                    />
+                </div>
 
-          {error && <span style={{ color: 'red' }}> {error} </span>}
-          {response && <span style={{ color: 'green' }}> Successful Login </span>}
+                {error && <div className="message-error">{error}</div>}
+                {response && <div className="message-success">Login exitoso! Redirigiendo...</div>}
 
-          {
-            loading
-              ? <button disabled>Iniciando sesión...</button>
-              : <button type="submit">Iniciar Sesión</button>
-          }
+                <button type="submit" disabled={loading} className="auth-button">
+                    {loading ? 'Cargando...' : 'Iniciar Sesión'}
+                </button>
 
-          <div style={{ marginTop: '20px', fontSize: '14px' }}>
-              <span>¿No tienes cuenta? </span>
-              <Link to="/register" style={{ color: '#007bff', textDecoration: 'none' }}>
-                  ¡Crea una!
-              </Link>
-          </div>
-        
-        </form>
+                <div className="auth-footer">
+                    <span>¿No tienes cuenta?</span>
+                    <Link to="/register" className="auth-link">
+                        ¡Crea una!
+                    </Link>
+                </div>
+            </form>
+        </div>
       </div>
   )
 }
