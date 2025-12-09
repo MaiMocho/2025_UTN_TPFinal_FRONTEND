@@ -5,6 +5,7 @@ import RegisterScreen from './Screens/RegisterScreen/RegisterScreen'
 import HomeScreen from './Screens/HomeScreen/HomeScreen'
 import AuthMiddleware from './Middleware/AuthMiddleware'
 import WorkspaceScreen from './Screens/WorkspaceScreen/WorkspaceScreen'
+import './global.css'
 
 function App() {
 

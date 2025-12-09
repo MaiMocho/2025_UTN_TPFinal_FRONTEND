@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import useFetch from '../../hooks/useFetch'
 import { getTasks, createTask, toggleTaskStatus, deleteTask } from '../../services/taskService'
+import './TaskList.css'
 
 const TaskList = () => {
     const { workspace_id } = useParams()
@@ -54,68 +55,39 @@ const TaskList = () => {
     }
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h2 style={{color: 'white'}}>Weekly Planner</h2>
+        <div className="planner-container">
+            <h2 className="planner-title">Weekly Planner</h2>
 
-            {/* ERROR: Si lo mostramos, pero el LOADING lo quitamos de aquí para que no empuje */}
-            {tasksError && <p style={{color: 'red'}}>{tasksError}</p>}
+            {tasksError && <p className="error-message">{tasksError}</p>}
             
-            {/* GRiD LAYOUT */}
-            <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-                gap: '20px',
-                opacity: tasksLoading ? 0.5 : 1,
-                pointerEvents: tasksLoading ? 'none' : 'auto', 
-                transition: 'opacity 0.2s ease-in-out'
-            }}>
+            {/* Usamos una clase condicional para la opacidad */}
+            <div className={`weekly-grid ${tasksLoading ? 'loading' : ''}`}>
+                
                 {daysOfWeek.map(day => (
-                    <div key={day} style={{ 
-                        border: '1px solid #444', 
-                        borderRadius: '10px', 
-                        padding: '15px', 
-                        background: '#1a1a1a',
-                        color: 'white',
-                        minHeight: '200px',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        <h3 style={{ borderBottom: '1px solid #666', paddingBottom: '10px', marginTop: 0 }}>
-                            {day}
-                        </h3>
+                    <div key={day} className="day-card">
+                        <h3 className="day-header">{day}</h3>
 
-                        <div style={{ flex: 1, marginBottom: '10px' }}>
+                        <div className="task-items-container">
                             {tasksResponse && tasksResponse.data.tasks
                                 .filter(task => task.day_of_week === day)
                                 .map(task => (
-                                    <div key={task._id} style={{ 
-                                        display: 'flex', 
-                                        justifyContent: 'space-between', 
-                                        alignItems: 'center',
-                                        marginBottom: '8px',
-                                        padding: '8px',
-                                        background: '#2d2d2d',
-                                        borderRadius: '5px',
-                                        borderLeft: '4px solid #00d4ff', 
-                                        color: 'white'
-                                    }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <div key={task._id} className={`task-item ${task.status === 'completed' ? 'completed' : ''}`}>
+                                        
+                                        <div className="task-content">
                                             <input 
                                                 type="checkbox" 
+                                                className="task-checkbox"
                                                 checked={task.status === 'completed'} 
                                                 onChange={() => handleToggle(task._id, task.status)}
-                                                style={{ cursor: 'pointer' }}
                                             />
-                                            <span style={{ 
-                                                textDecoration: task.status === 'completed' ? 'line-through' : 'none',
-                                                opacity: task.status === 'completed' ? 0.5 : 1
-                                            }}>
+                                            <span className={`task-text ${task.status === 'completed' ? 'completed' : ''}`}>
                                                 {task.title}
                                             </span>
                                         </div>
+
                                         <button 
+                                            className="delete-btn"
                                             onClick={() => handleDelete(task._id)}
-                                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px' }}
                                         >
                                             ❌
                                         </button>
@@ -124,29 +96,15 @@ const TaskList = () => {
                             }
                         </div>
 
-                        <form onSubmit={(e) => handleCreateTask(e, day)} style={{ display: 'flex', gap: '5px' }}>
+                        <form onSubmit={(e) => handleCreateTask(e, day)} className="add-task-form">
                             <input 
                                 type="text" 
+                                className="add-task-input"
                                 value={newTasks[day] || ''}
                                 onChange={(e) => handleInputChange(day, e.target.value)}
                                 placeholder="Nueva tarea..."
-                                style={{ 
-                                    flex: 1, 
-                                    padding: '8px', 
-                                    borderRadius: '5px', 
-                                    border: '1px solid #555',
-                                    background: '#222',
-                                    color: 'white'
-                                }}
                             />
-                            <button type="submit" style={{ 
-                                cursor: 'pointer', 
-                                background: '#00d4ff', 
-                                border: 'none', 
-                                borderRadius: '5px',
-                                padding: '0 10px',
-                                fontWeight: 'bold'
-                            }}>+</button>
+                            <button type="submit" className="add-task-btn">+</button>
                         </form>
                     </div>
                 ))}
