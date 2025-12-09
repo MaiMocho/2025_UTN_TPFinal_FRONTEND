@@ -40,7 +40,7 @@ const RegisterScreen = () => {
     return (
         <div className="auth-container">
             <div className="auth-card">
-                <h1 className="auth-title">Join Us! ✨</h1>
+                <h1 className="auth-title">Join Us!</h1>
 
                 <form onSubmit={handleSubmit}>
 
@@ -83,16 +83,16 @@ const RegisterScreen = () => {
                     </div>
 
                     {error && <div className="message-error">{error}</div>}
-                    {response && <div className="message-success">¡Usuario registrado con éxito! Revisa tu email 📧</div>}
+                    {response && <div className="message-success">User registered successfully! Check your email to activate your account</div>}
 
                     <button type="submit" disabled={loading} className="auth-button">
                         {loading ? 'Creando cuenta...' : 'Registrarse'}
                     </button>
 
                     <div className="auth-footer">
-                        <span>¿Ya tienes cuenta?</span>
+                        <span>Already have an account?</span>
                         <Link to="/login" className="auth-link">
-                            ¡Inicia sesión!
+                            Sign in
                         </Link>
                     </div>
 
