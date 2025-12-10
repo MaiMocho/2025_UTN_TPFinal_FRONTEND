@@ -145,3 +145,77 @@
     background-color: #A2D2FF;
     color: white;
 }
+div.kawaii-popup {
+    border-radius: 25px;
+    background: #fff9f0;
+    border: 3px solid #E0C3FC;
+    font-family: 'Quicksand', sans-serif;
+    padding: 20px;
+}
+
+h2.kawaii-title {
+    color: #7c6a96;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+div.kawaii-icon {
+    border: none;
+    background: transparent;
+    font-size: 4rem;
+    animation: bounce 2s infinite;
+    margin: 20px auto;
+}
+button.kawaii-confirm-btn {
+    background-color: #ffb7b2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #ff9e99;
+    margin: 0 10px;
+    transition: transform 0.1s;
+    outline: none;
+}
+
+button.kawaii-confirm-btn:hover {
+    background-color: #ffaba5;
+    transform: translateY(-2px);
+}
+
+button.kawaii-confirm-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+button.kawaii-cancel-btn {
+    background-color: #BDE0FE;
+    color: #555;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #a2d2ff;
+    margin: 0 10px;
+    transition: transform 0.1s;
+    outline: none;
+}
+
+button.kawaii-cancel-btn:hover {
+    background-color: #a8d8ff;
+    transform: translateY(-2px);
+}
+
+button.kawaii-cancel-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
