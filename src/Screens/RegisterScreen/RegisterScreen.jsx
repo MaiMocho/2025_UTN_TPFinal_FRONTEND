@@ -71,7 +71,7 @@ const RegisterScreen = () => {
                     </div>
 
                     <div className="form-group">
-                        <label autoComplete="off" className="form-label" htmlFor="password">Password</label>
+                        <label className="form-label" htmlFor="password">Password</label>
                         <input
                             className="auth-input"
                             type="password"
@@ -80,7 +80,7 @@ const RegisterScreen = () => {
                             name={REGISTER_FORM_FIELDS.PASSWORD}
                             onChange={onInputChange}
                             id='password'
-                            autoComplete="off"
+                            autoComplete="new-password"
                         />
                     </div>
 
