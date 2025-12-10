@@ -1,17 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router'
-// Asegúrate de que la ruta de importación sea correcta
-import TaskList from '../../Components/TaskList/TaskList' 
+import TaskList from '../../Components/TaskList/TaskList'
+import './WorkspaceScreen.css'
 
 const WorkspaceScreen = () => {
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-        <aside style={{ width: '200px', background: '#f0f0f0', padding: '20px' }}>
-            <h3>Menú</h3>
-            <Link to="/home">⬅ Volver al Inicio</Link>
+    <div className="workspace-layout">
+        <aside className="sidebar-container">
+            <h3 className="sidebar-title">Menu</h3>
+            <Link to="/home" className="back-link">
+                ⬅ Volver al menu
+            </Link>
         </aside>
 
-        <main style={{ flex: 1, padding: '20px', background: '#111' }}>
+        <main className="workspace-main">
             <TaskList />
         </main>
     </div>

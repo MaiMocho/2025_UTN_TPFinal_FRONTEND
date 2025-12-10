@@ -1,0 +1,32 @@
+.sidebar-container {
+    width: 250px;
+    background-color: white;
+    border-right: 3px solid #f0f0f0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+}
+
+.sidebar-title {
+    color: #9A77CF;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #666;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+.back-link:hover {
+    background-color: #f8f0ff;
+    color: #9A77CF;
+}

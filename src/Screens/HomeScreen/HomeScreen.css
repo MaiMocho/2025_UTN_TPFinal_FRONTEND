@@ -141,3 +141,37 @@
     background-color: #B088F9;
     color: white;
 }
+
+@media (max-width: 600px) {
+    .top-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .app-title {
+        font-size: 1.4rem;
+    }
+
+    .content-container {
+        padding: 20px;
+    }
+
+    .creation-section {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .create-form {
+        flex-direction: column;
+    }
+
+    .pastel-button {
+        width: 100%;
+    }
+
+    .grid-workspaces {
+        grid-template-columns: 1fr;
+    }
+}
