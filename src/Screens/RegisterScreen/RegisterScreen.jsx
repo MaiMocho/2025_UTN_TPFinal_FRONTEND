@@ -80,7 +80,7 @@ const RegisterScreen = () => {
                             name={REGISTER_FORM_FIELDS.PASSWORD}
                             onChange={onInputChange}
                             id='password'
-                            autoComplete="new-password"
+                            autoComplete="off"
                         />
                     </div>
 
