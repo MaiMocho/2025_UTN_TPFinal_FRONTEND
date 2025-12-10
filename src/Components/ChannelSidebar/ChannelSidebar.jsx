@@ -13,7 +13,6 @@ const ChannelSidebar = () => {
     } = useFetch()
     const {workspace_id} = useParams()
 
-    //Responsable de cargar la lista de canales
     function loadChannelList (){
         sendRequest(
             async () => {
@@ -21,13 +20,11 @@ const ChannelSidebar = () => {
             }
         )
     }
-
-    //Apenas se cargue el componente debemos intentar obtener la lista de canales, tambien se debe re-ejecutar si cambia el workspace_id
     useEffect(
         () => {
             loadChannelList()
         },
-        [workspace_id] //Cada vez que cambie workspace_id re ejecutar el efecto
+        [workspace_id]
     )
 
     console.log(response, error, loading)

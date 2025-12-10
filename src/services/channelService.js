@@ -1,11 +1,6 @@
-
-//Para hacer ahora
-//GET /api/workspace/:workspace_id/channels
-
 import ENVIRONMENT from "../config/environment";
 import { AUTH_TOKEN_KEY } from "../Context/AuthContext";
 
-//Obtiene la lista de canales
 async function getChannelList (workspace_id){
     const response_http = await fetch(
         ENVIRONMENT.URL_API + `/api/workspace/${workspace_id}/channels`,
@@ -24,11 +19,6 @@ async function getChannelList (workspace_id){
     }
     return response;
 }
-
-//POST /api/workspace/:workspace_id/channels
-//Crea un nuevo canal
-//Debes pasar por body el name
-//body example: {name: 'general'}
 async function createChannel (workspace_id, channel_name){
 
 }

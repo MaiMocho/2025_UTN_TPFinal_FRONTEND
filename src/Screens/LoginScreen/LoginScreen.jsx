@@ -7,22 +7,22 @@ import { AuthContext } from '../../Context/AuthContext'
 import './LoginScreen.css'
 
 const LoginScreen = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const {onLogin} = useContext(AuthContext)
-  
-  useEffect(
-    () => {
-      const query = new URLSearchParams(location.search)
-      const from = query.get('from')
-      if (from === 'verified_email') {
-        alert('Has validado tu mail exitosamente')
-      }
-    },
-    [] 
-  )
+    const navigate = useNavigate()
+    const location = useLocation()
+    const { onLogin } = useContext(AuthContext)
 
-  const LOGIN_FORM_FIELDS = {
+    useEffect(
+        () => {
+            const query = new URLSearchParams(location.search)
+            const from = query.get('from')
+            if (from === 'verified_email') {
+                alert('Has validado tu mail exitosamente')
+            }
+        },
+        []
+    )
+
+    const LOGIN_FORM_FIELDS = {
         EMAIL: 'email',
         PASSWORD: 'password'
     }
@@ -55,62 +55,62 @@ const LoginScreen = () => {
 
     useEffect(
         () => {
-          if(response && response.ok){
-            onLogin(response.body.auth_token)
-          }
+            if (response && response.ok) {
+                onLogin(response.body.auth_token)
+            }
         },
         [response]
     )
 
-  return (
-      <div className="auth-container">
-        <div className="auth-card">
-            <h1 className="auth-title">Hello Again!</h1>
-            
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label className="form-label" htmlFor="email">Email</label>
-                    <input  
-                        className="auth-input"
-                        type="text" 
-                        placeholder="tu@email.com" 
-                        value={form_state[LOGIN_FORM_FIELDS.EMAIL]} 
-                        name={LOGIN_FORM_FIELDS.EMAIL} 
-                        onChange={onInputChange} 
-                        id={'email'} 
-                    />
-                </div>
+    return (
+        <div className="auth-container">
+            <div className="auth-card">
+                <h1 className="auth-title">Bienvenido de vuelta!</h1>
 
-                <div className="form-group">
-                    <label className="form-label" htmlFor="password">Password</label>
-                    <input 
-                        className="auth-input"
-                        type="password" 
-                        placeholder="••••••••" 
-                        value={form_state[LOGIN_FORM_FIELDS.PASSWORD]} 
-                        name={LOGIN_FORM_FIELDS.PASSWORD} 
-                        onChange={onInputChange} 
-                        id={'password'} 
-                    />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label className="form-label" htmlFor="email">Email</label>
+                        <input
+                            className="auth-input"
+                            type="text"
+                            placeholder="tu@email.com"
+                            value={form_state[LOGIN_FORM_FIELDS.EMAIL]}
+                            name={LOGIN_FORM_FIELDS.EMAIL}
+                            onChange={onInputChange}
+                            id={'email'}
+                        />
+                    </div>
 
-                {error && <div className="message-error">{error}</div>}
-                {response && <div className="message-success">Login exitoso! Redirigiendo...</div>}
+                    <div className="form-group">
+                        <label className="form-label" htmlFor="password">Password</label>
+                        <input
+                            className="auth-input"
+                            type="password"
+                            placeholder="••••••••"
+                            value={form_state[LOGIN_FORM_FIELDS.PASSWORD]}
+                            name={LOGIN_FORM_FIELDS.PASSWORD}
+                            onChange={onInputChange}
+                            id={'password'}
+                        />
+                    </div>
 
-                <button type="submit" disabled={loading} className="auth-button">
-                    {loading ? 'Cargando...' : 'Iniciar Sesión'}
-                </button>
+                    {error && <div className="message-error">{error}</div>}
+                    {response && <div className="message-success">Login exitoso! Redirigiendo...</div>}
 
-                <div className="auth-footer">
-                    <span>¿No tienes cuenta?</span>
-                    <Link to="/register" className="auth-link">
-                        ¡Crea una!
-                    </Link>
-                </div>
-            </form>
+                    <button type="submit" disabled={loading} className="auth-button">
+                        {loading ? 'Cargando...' : 'Iniciar Sesión'}
+                    </button>
+
+                    <div className="auth-footer">
+                        <span>¿No tienes cuenta?</span>
+                        <Link to="/register" className="auth-link">
+                            ¡Crea una!
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
-  )
+    )
 }
 
 export default LoginScreen

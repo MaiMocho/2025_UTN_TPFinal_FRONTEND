@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../../Context/AuthContext'
 import './UserMenu.css' 
+// 👇 CAMBIO: Importamos desde 'react-icons/bs' (Bootstrap Icons)
+import { BsPencilSquare, BsCardImage, BsBoxArrowRight } from "react-icons/bs";
 
 const UserMenu = () => {
     const { user, onLogout } = useContext(AuthContext)
@@ -29,9 +31,13 @@ const UserMenu = () => {
                         <p>Opciones de cuenta</p>
                     </div>
                     <ul className="menu-list">
-                        <li className="menu-item">✏️ Editar Perfil</li>
-                        <li className="menu-item">🖼️ Cambiar Foto</li>
-                        <li className="menu-item logout" onClick={onLogout}>🚪 Cerrar Sesión</li>
+                        <li className="menu-item"> <BsPencilSquare size={18} /> Editar Perfil
+                        </li>
+                        <li className="menu-item"> <BsCardImage size={18} /> Cambiar Foto
+                        </li>
+                        
+                        <li className="menu-item logout" onClick={onLogout}> <BsBoxArrowRight size={18} /> Cerrar Sesión
+                        </li>
                     </ul>
                 </div>
             )}

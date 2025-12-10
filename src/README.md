@@ -2,7 +2,7 @@ Maia Mojsiejczuk _ 2025
 
 Weekly Planner - Frontend
 
-Esta es una aplicación de gestión de tareas y espacios de trabajo diseñada con un enfoque Soft UI, priorizando una experiencia de usuario amigable, limpia y responsiva.
+Esta es una aplicación de gestión de tareas y espacios de trabajo diseñada con un enfoque Soft UI, priorizando una experiencia de usuario amigable y responsiva.
 
 Este proyecto es parte del Recuperatorio Trabajo Integrador Final: API CRUD con MongoDB.
 
@@ -13,10 +13,11 @@ Routing: React Router Dom (v7)
 Estilos: CSS Modules (Diseño responsivo y custom)
 Alertas: SweetAlert2
 HTTP Client: Fetch API (con Custom Hooks)
+Iconos: React icons > Bootstrap
 
  Funcionalidades
 
- Autenticación:** Registro y Login con validaciones visuales.
+ Autenticación: Registro y Login con validaciones visuales.
  Workspaces: Creación y listado de espacios de trabajo personales.
  Weekly Planner: Tablero semanal interactivo.
  Tareas: Crear, completar y eliminar tareas dinámicamente.

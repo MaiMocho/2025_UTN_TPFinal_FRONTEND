@@ -36,7 +36,6 @@ const AuthContextProvider = ({children}) => {
             
             if (token && isExpired(token)) {
                 onLogout() 
-                
                 Swal.fire({
                     title: '⚠️ Sesión Finalizada',
                     text: 'Tu tiempo de sesión ha expirado. Por favor, inicia sesión nuevamente.',
