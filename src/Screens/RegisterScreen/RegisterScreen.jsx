@@ -49,6 +49,7 @@ const RegisterScreen = () => {
                         <input
                             className="auth-input"
                             type="text"
+                            placeholder='Tu nombre'
                             value={form_state[REGISTER_FORM_FIELDS.USERNAME]}
                             name={REGISTER_FORM_FIELDS.USERNAME}
                             id='username'
@@ -83,16 +84,16 @@ const RegisterScreen = () => {
                     </div>
 
                     {error && <div className="message-error">{error}</div>}
-                    {response && <div className="message-success">User registered successfully! Check your email to activate your account</div>}
+                    {response && <div className="message-success">Usuario registrado con exito! Verifica tu email para activar tu cuenta</div>}
 
-                    <button type="submit" disabled={loading} className="auth-button">
+                    <button type="submit" disabled={cargando} className="auth-button">
                         {loading ? 'Creando cuenta...' : 'Registrarse'}
                     </button>
 
                     <div className="auth-footer">
-                        <span>Already have an account?</span>
+                        <span>Ya tenes una cuenta?</span>
                         <Link to="/login" className="auth-link">
-                            Sign in
+                            Iniciar sesión
                         </Link>
                     </div>
 

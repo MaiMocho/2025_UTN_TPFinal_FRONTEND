@@ -35,17 +35,20 @@ const AuthContextProvider = ({children}) => {
             const token = localStorage.getItem(AUTH_TOKEN_KEY)
             
             if (token && isExpired(token)) {
-                onLogout()
+                onLogout() 
                 
                 Swal.fire({
-                    title: '🐻 Helpy Freddy dice:', 
-                    text: 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
+                    title: '⚠️ Sesión Finalizada',
+                    text: 'Tu tiempo de sesión ha expirado. Por favor, inicia sesión nuevamente.',
                     icon: 'warning',
                     confirmButtonText: 'Entendido',
-                    background: '#1a1a1a', 
-                    color: '#ffffff',
-                    confirmButtonColor: '#00d4ff', 
-                    iconColor: '#00d4ff'
+                    buttonsStyling: false,
+                    customClass: {
+                        popup: 'session-expired-popup',
+                        title: 'session-expired-title',
+                        confirmButton: 'session-expired-btn',
+                        container: 'session-expired-backdrop'
+                    }
                 })
             }
         }, 5000) 

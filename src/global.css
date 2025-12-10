@@ -5,3 +5,53 @@
     padding: 0;
     box-sizing: border-box;
 }
+.swal2-container.session-expired-backdrop {
+    background-color: rgba(20, 5, 5, 0.9); 
+    backdrop-filter: blur(5px);
+}
+
+/*div*/
+.session-expired-popup {
+    background-color: #2c0b0e;
+    color: #ffffff;
+    border-radius: 25px;
+    border: 2px solid #ff4757;
+    box-shadow: 0 0 30px rgba(255, 71, 87, 0.3);
+    font-family: 'Quicksand', sans-serif;
+}
+
+h2.session-expired-title {
+    color: #ff6b81;
+    font-weight: 700;
+}
+
+
+button.session-expired-btn {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #c0392b;
+    transition: transform 0.1s;
+    outline: none;
+    margin: 10px 0;
+}
+
+button.session-expired-btn:hover {
+    background-color: #ff6b81;
+    transform: translateY(-2px);
+}
+
+button.session-expired-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+.session-expired-popup .swal2-icon.swal2-warning {
+    border-color: #ff4757;
+    color: #ff4757;
+}

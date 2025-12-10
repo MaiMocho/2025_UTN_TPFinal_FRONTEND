@@ -36,7 +36,6 @@ const HomeScreen = () => {
             <UserMenu />
         </header>
 
-        {/* Contenido con fondo de cuadros */}
         <div className="content-container">
             
             <div className="creation-section">
@@ -55,7 +54,7 @@ const HomeScreen = () => {
                 </form>
             </div>
 
-            {loading && <p className="loading-text">Loading your spaces...</p>}
+            {loading && <p className="loading-text">Cargando espacios de trabajo...</p>}
             {error && <p className="error-text">{error}</p>}
 
             <div className="grid-workspaces">
@@ -71,7 +70,7 @@ const HomeScreen = () => {
                         <div className="card-body">
                             <h3>{workspace.workspace_name || workspace.name}</h3>
                             <Link to={'/workspace/' + idReal} className="enter-link">
-                                Open Space ➜
+                                Abrir espacio ➜
                             </Link>
                         </div>
                     </div>
