@@ -86,7 +86,7 @@ const RegisterScreen = () => {
                     {error && <div className="message-error">{error}</div>}
                     {response && <div className="message-success">Usuario registrado con exito! Verifica tu email para activar tu cuenta</div>}
 
-                    <button type="submit" disabled={cargando} className="auth-button">
+                    <button type="submit" disabled={loading} className="auth-button">
                         {loading ? 'Creando cuenta...' : 'Registrarse'}
                     </button>
 
