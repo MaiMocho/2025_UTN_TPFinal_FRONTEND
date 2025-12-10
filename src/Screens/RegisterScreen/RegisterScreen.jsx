@@ -71,7 +71,7 @@ const RegisterScreen = () => {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label" htmlFor="password">Password</label>
+                        <label autoComplete="off" className="form-label" htmlFor="password">Password</label>
                         <input
                             className="auth-input"
                             type="password"
