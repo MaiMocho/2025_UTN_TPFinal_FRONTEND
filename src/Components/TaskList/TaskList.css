@@ -100,26 +100,45 @@
 
 .add-task-input {
     flex: 1;
-    padding: 8px;
-    border-radius: 10px;
+    min-width: 0;
+    padding: 10px 12px;
+    border-radius: 12px;
     border: 2px solid #eee;
     background-color: #fff;
-    color: #333;
+    color: #555;
     outline: none;
+    font-family: 'Quicksand', sans-serif;
+    transition: all 0.2s;
 }
 
 .add-task-input:focus {
     border-color: #BDE0FE;
+    box-shadow: 0 0 0 3px rgba(176, 136, 249, 0.1);
+}
+
+.add-task-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: auto;
+    box-sizing: border-box;
 }
 
 .add-task-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
     background-color: #BDE0FE;
     color: #555;
     border: none;
-    border-radius: 10px;
-    padding: 0 12px;
     font-weight: bold;
+    font-size: 1.2rem;
     cursor: pointer;
+    transition: transform 0.1s;
 }
 
 .add-task-btn:hover {

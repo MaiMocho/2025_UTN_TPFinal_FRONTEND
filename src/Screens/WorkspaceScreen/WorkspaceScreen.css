@@ -1,17 +1,22 @@
 .sidebar-container {
-    width: 250px;
-    background-color: white;
-    border-right: 3px solid #f0f0f0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+        width: 100%;
+        height: 70px;
+        border-right: none;
+        border-bottom: none;
+        padding: 0 20px;
+        flex-direction: row; 
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(90deg, #D4A5FF 0%, #B088F9 100%);
+        box-shadow: 0 4px 15px rgba(176, 136, 249, 0.3);
+        z-index: 100;
 }
 
 .sidebar-title {
     color: #9A77CF;
     font-size: 1.5rem;
     margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .back-link {
@@ -30,3 +35,9 @@
     background-color: #f8f0ff;
     color: #9A77CF;
 }
+.workspace-main {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background-color: #fff9f0;
+    }
