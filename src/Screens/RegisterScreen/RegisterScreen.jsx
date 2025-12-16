@@ -19,16 +19,25 @@ const RegisterScreen = () => {
     }
     const { response, error, loading, sendRequest } = useFetch()
     function onRegister(form_state_sent) {
-        sendRequest(
-            () => {
-                return register(
-                    form_state_sent[REGISTER_FORM_FIELDS.USERNAME],
-                    form_state_sent[REGISTER_FORM_FIELDS.EMAIL],
-                    form_state_sent[REGISTER_FORM_FIELDS.PASSWORD]
-                )
-            }
-        )
+    if (
+        !form_state_sent.username.trim() || 
+        !form_state_sent.email.trim() || 
+        !form_state_sent.password.trim()
+    ) {
+        alert('Por favor, completa todos los campos para registrarte.');
+        return;
     }
+
+    sendRequest(
+        () => {
+            return register(
+                form_state_sent[REGISTER_FORM_FIELDS.USERNAME],
+                form_state_sent[REGISTER_FORM_FIELDS.EMAIL],
+                form_state_sent[REGISTER_FORM_FIELDS.PASSWORD]
+            )
+        }
+    )
+}
 
     const {
         form_state,

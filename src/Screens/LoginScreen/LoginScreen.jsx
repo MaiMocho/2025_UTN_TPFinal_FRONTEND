@@ -35,6 +35,11 @@ const LoginScreen = () => {
     const { response, error, loading, sendRequest, resetResponse } = useFetch()
 
     function handleLogin(form_state_sent) {
+        if (!form_state_sent.email.trim() || !form_state_sent.password.trim()) {
+            alert("Por favor, completa todos los campos."); 
+            return;
+        }
+
         resetResponse()
         sendRequest(
             () => {
