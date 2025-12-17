@@ -4,6 +4,7 @@ import useFetch from '../../hooks/useFetch'
 import { getWorkspaces, createWorkspace } from '../../services/workspaceService'
 import UserMenu from '../../Components/UserMenu/UserMenu'
 import './HomeScreen.css'
+import { BsStars } from "react-icons/bs";
 
 const HomeScreen = () => {
     const { sendRequest, response, loading, error } = useFetch()
@@ -59,7 +60,13 @@ const HomeScreen = () => {
 
                 <div className="grid-workspaces">
                     {response && response.data.workspaces.length === 0 && (
-                        <div className="empty-state">Aun no tienes tareas. Crea una!</div>
+                        <div className="empty-state-container">
+                            <BsStars className="empty-icon" />
+                            <p className="empty-title">¡Todo muy tranquilo por aquí!</p>
+                            <span className="empty-subtitle">
+                                Crea tu primer espacio de tareas arriba para comenzar
+                            </span>
+                        </div>
                     )}
 
                     {response && response.data.workspaces.map((workspace) => {
