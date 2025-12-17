@@ -7,7 +7,7 @@ const WorkspaceScreen = () => {
   return (
     <div className="workspace-layout">
         <aside className="sidebar-container">
-            <h3 className="sidebar-title">Menu</h3>
+            <h3 className="sidebar-title">Your List</h3>
             <Link to="/home" className="back-link">
                 ⬅ Volver al menu
             </Link>

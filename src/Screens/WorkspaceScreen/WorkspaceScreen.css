@@ -11,6 +11,7 @@
     box-shadow: 0 4px 12px rgba(176, 136, 249, 0.3);
     z-index: 10;
     position: relative;
+    font-family: 'Quicksand', system-ui, -apple-system, sans-serif;
 }
 
 .sidebar-title {
@@ -28,7 +29,6 @@
     font-size: 0.9rem;
     font-weight: 600;
     border-radius: 50px;
-    /* Redondo */
     border: 1px solid rgba(255, 255, 255, 0.5);
     text-decoration: none;
     display: flex;
